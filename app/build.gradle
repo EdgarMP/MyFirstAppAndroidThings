@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "edgarmarcopolo.com.myfirstappandroidthings"
+        minSdkVersion 24
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "PROJECT_ID", '"androidthings-156403"'
+            buildConfigField "String", "PUBSUB_TOPIC", '"MyTopic"'
+        }
+        release {
+            initWith(buildTypes.debug)
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    provided 'com.google.android.things:androidthings:0.1-devpreview'
+
+    compile 'com.android.support:appcompat-v7:24.+'
+    compile 'com.google.android.things.contrib:driver-button:0.1'
+    compile 'com.google.android.things.contrib:driver-bmx280:0.1'
+    compile 'com.google.android.things.contrib:driver-ht16k33:0.1'
+    compile 'com.google.android.things.contrib:driver-apa102:0.1'
+    compile 'com.google.android.things.contrib:driver-pwmspeaker:0.1'
+
+    compile('com.google.api-client:google-api-client-android:1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    compile('com.google.apis:google-api-services-pubsub:v1-rev12-1.22.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+}
